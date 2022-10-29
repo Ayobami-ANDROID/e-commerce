@@ -1,11 +1,13 @@
 const express = require('express')
 const app = express()
 const connectDb = require('./db/connectDb')
-const user = require('./routes/user')
+const userRoute = require('./routes/user')
+const authRoute = require('./routes/auth')
 require('dotenv').config()
 
-app.use('/api/v1',user)
 app.use(express.json())
+app.use('/api/v1',userRoute)
+app.use('/api/auth',authRoute)
 
 const port = process.env.PORT || 8080
 
