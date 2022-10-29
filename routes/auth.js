@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const User = require("../model/User")
 const cryptoJS = require('crypto-js')
+const JWT = require('jsonwebtoken')
 require('dotenv').config()
 
 router.post('/register',async (req,res)=>{
@@ -29,9 +30,12 @@ router.post('/login',async (req,res)=>{
       const hashedPassword = cryptoJS.AES.decrypt(user.password, process.env.PASS_SEC)
       const pass = hashedPassword.toString(cryptoJS.enc.Utf8)
       pass !== password && res.status(401).json('wrong credentials')
-      res.status(200).json({user})
+      const acessToken = JWT.sign({
+         id:user._id,isAdmin:user.isAdmin
+      },process.env.JWT_SEC ,{expiresIn:'3d'})
+      res.status(200).json({user,acessToken})
    } catch (error) {
-      
+      console.log(error)
    }
 })
 

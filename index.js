@@ -6,7 +6,7 @@ const authRoute = require('./routes/auth')
 require('dotenv').config()
 
 app.use(express.json())
-app.use('/api/v1',userRoute)
+app.use('/api/users',userRoute)
 app.use('/api/auth',authRoute)
 
 const port = process.env.PORT || 8080
