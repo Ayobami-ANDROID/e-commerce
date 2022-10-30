@@ -3,15 +3,15 @@ const mongoose = require('mongoose')
 const productSchema = new mongoose.Schema({
     title:{
         type:String,
-        required:[true,'must provide a title']
+        required:true
     },
     desc:{
         type:String,
-        required:[true,'please provide desc'],
+        required:true,
     },
     img:{
         type:String,
-        required:[true,'please provide image'],
+        required:true,
     },
     categories:{
         type:Array,
@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
     },
     price:{
         type:Number,
-        required:[true,'please provide price'],
+        required:true,
     }
    
 },
