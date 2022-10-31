@@ -55,6 +55,15 @@ router.get("/",async (req,res)=>{
         res.status(500).json('you are not authorized')
     }
 }) 
+router.put("/:id",verifyTokenAndAuthorization, async (req,res)=>{
+   
+      try {
+          const updateProduct = await Product.findByIdAndUpdate({_id:req.params.id},req.body,{new:true,runValidators:true})
+          res.status(200).json({updateProduct })
+      } catch (error) {
+          res.status(500).json(error)
+      }
+  })
 
 // router.get('/stats',verifyTokenAndAdmin,async (req,res)=>{
 //     const date = new Date()
